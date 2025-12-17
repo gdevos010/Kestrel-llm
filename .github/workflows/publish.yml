@@ -33,16 +33,7 @@ jobs:
           python -m pip install build
           python -m build
 
-      # If you configured PyPI "Trusted Publishing" for this repo/project, no secret is needed.
-      - name: Publish to PyPI (trusted publishing)
-        if: ${{ secrets.PYPI_API_TOKEN == '' }}
+      - name: Publish to PyPI (trusted publishing via OIDC)
         uses: pypa/gh-action-pypi-publish@release/v1
-
-      # Fallback: classic API token publishing (create a repo secret named PYPI_API_TOKEN).
-      - name: Publish to PyPI (API token)
-        if: ${{ secrets.PYPI_API_TOKEN != '' }}
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
 
 
